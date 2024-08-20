@@ -7,7 +7,7 @@ on:
 
 # 환경설정
 env:
-  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/nuxt-auto-deploy
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/next-auto-deploy
   VERSION: ${{ github.sha }}
   NAME: go_cicd
 
@@ -19,6 +19,13 @@ jobs:
     steps:
       # github repository에서 checkout
       - uses: actions/checkout@v2
+      - name: Print Environment Variables
+        run: |
+          echo "GitHub Actor: ${{ github.actor }}"
+          echo "GitHub Repository Owner: ${{ github.repository_owner }}"
+          echo "GitHub SHA: ${{ github.sha }}"
+          echo "Docker Image: ${{ env.DOCKER_IMAGE }}"
+          echo "Container Name: ${{ env.NAME }}"
       # docker build 수행
       - name: Set up docker buildx
         id: buildx
